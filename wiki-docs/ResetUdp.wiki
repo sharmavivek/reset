@@ -1,0 +1,14 @@
+a Reliable Secure Efficient Transport
+
+= Introduction =
+
+Today NAT is so essential that no network based application can do without it, and equally important is Security. Quest for efficiently providing security at lowest possible inter-networking layer, has been unending.
+
+Reset probably be another sheep in the herd, or may be not coz of few imp USP.
+
+
+= Design Goals... =
+    to design a Transport Mechanism which is NAT safe.
+    Host-to-Host Authentication
+    User Authentication and establishment of new connections.
+    Encrypted Communications for confidentiality and integrity.

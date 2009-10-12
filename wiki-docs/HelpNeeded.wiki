@@ -1,0 +1,6 @@
+_This page contains all the open issues, for which i donot know the right choice_
+
+== Questions ==
+ # how to implement timers.
+ # how to implement the sending-receiving window
+	# What all information shall the receiving window store.

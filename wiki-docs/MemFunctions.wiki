@@ -1,0 +1,23 @@
+_This File contains all the memory related System Calls_
+
+==== Memory Related System Calls ====
+
+ # bcopy
+ # memcpy
+ # memmove
+ # memzero
+ # 
+
+
+==== Details ====
+ # *bcopy* 
+	#include <string.h>
+	void bcopy(const void *src, void *dst, int n); 
+
+	The bcopy() function performs byte string copy. bcopy() copies n bytes from string src to string dst. The result is correct, even when both areas overlap. use  memcpy(3)  or  memmove(3) in new programs.
+
+ # 
+
+
+==== making a memory manager to implement vector workings ====	
+ # *link lists of variable arrays*	and how to track and maintain the mathematics of it.

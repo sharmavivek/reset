@@ -1,0 +1,7 @@
+_This file will contain all the commands for the protocol_
+
+
+=== Commands ===
+ # *start*
+	* start secure and reliable
+	* start unsecure and reliable

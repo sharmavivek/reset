@@ -1,0 +1,21 @@
+_how to get the code from bazaar_
+
+==== Details ====
+- make a directory with the name of project
+- bzr init _on the empty directory_
+- bzr pull http://bazaar.launchpad.net/~username/projectName/branch
+
+*Since You have a new sytem/ you would need a ssh key setup*
+- visit the project page at launchpad
+- go to key section _visible on the main page_
+- generate a ssh+key https://help.launchpad.net/YourAccount/CreatingAnSSHKeyPair
+
+- On the user-page 
+	- edit the keys, you can if you want delete the old key, and add the new key, which you have generated on your machine 
+
+now you are good to go.
+
+
+do some changes or additions then 
+- commit or add 
+- push in the end.

@@ -1,0 +1,43 @@
+_This contains the design consideration for how to implement the Sending Receiving Sliding Window_
+
+==== Required for the Window ====
+ # pointer to the packet sent
+ # flag for acknowledgement waiting from receiver
+ # no congestion protection mechanism. 
+
+
+===== How to Implement =====
+ * _the sliding window_ -- A circular queue, of SWND_MAX_SIZE.
+ * _flow control_ -- A variable to keep track of allowed present window size. 
+ * _sliding window movement_ -- For every Ack in-seq (cummulative ack mech) move the tail forward by 1 and head forward by 2.
+ * _place holder for ack_ -- Where is the best place to put if a packet is received, the circular Q.
+ * a buffer between the application and the network data flow.
+ * The Receiver Advertised Window (adwn) is the buffer size sent in each ACK  from TCP receiver to TCP sender. The TCP header uses a 16 bit field to report the receive window size to the sender. Therefore, the largest window that can be used is 2^16=65k bytes.
+ * Sequence Number
+===== sliding window operation =====
+ * *Sender* creates a sequence number for each frame as it is transmitted. Throughout the communication, it maintains the send window size, the last acknowledgment received, and the last frame sent. To ensure that the window does not overflow, the sender ensures that the window size is greater than the sequence number of last frame sent minus the sequence number last acknowledgment received.
+ * When the sender transmits a frame, it increments the sequence number by one and starts a timer. The sequence number is sent with the frame so that the receiver can detect if a frame is received out of order. The sender continues sending frames until the buffer of unacknowledged frames is as large as the send window size. The sender then waits until it receives acknowledgments before transmitting more frames.
+ * Whenever the sender receives an acknowledgment from the receiver, it increments the value of the last acknowledgement received, thereby sliding the "sliding window" to the right. If the timer for the frame expires before the sender receives an acknowledgment for the frame, it assumes that the frame was lost and retransmits it.
+
+ * *Receiver* holds onto three pieces of information as well: the receive window size, the last frame received, and the next frame to acknowledge.
+ * When a frame arrives, the receiver evaluates the frame to determine if it falls within the receiver's window. The size of the receiver's window is determined by the number of frames the receiver can buffer before overflowing. The receiver can not process frames received out of order. A frame is out of order if a gap exists between the sequence numbers of the newly received frame and that of the last frame received.
+ * If a frame is received with a sequence number that results in a gap larger than the size of the receiver's window, the frame is determined to be outside the window and is discarded. If a frame is received with a sequence number that is lower than or equal to that of the last frame received, this frame is by definition outside the window and must be a duplicate. It is also discarded. Packets with sequence numbers that fall within the window are accepted and put into the buffer.
+ * After accepting the frame, the receiver again checks the sequence number to determine if the frame was received in the correct order. The receiver compares the incoming frame's sequence number to next frame to acknowledge sequence number. If they match the receiver sends an acknowledgment. The next frame to acknowledge and last frame received are both incremented, thus sliding the window along.
+
+ * *Data Structure*
+ What shall be the elements in the data structure for sliding window
+ # pointer to the packet send/receive
+ # bool telling if the packet is acknowledged or not _will this be required at receiver?_
+ # SeqNo -- or keeping a variable called window_beginning_element and adding the array index to it for every transaction.  
+
+ * *Sequence Number* 
+	# one way is store each sequence no in the sliding widow beside the pkt pointer.
+	# _another way if possible_ store global data 
+		* start sequence no 
+		* recent sent sequence no
+		* oldest/smallest sequence no present in the window.
+
+ * Ack Mechanism 
+	* entry is removed only on the arrival of the positive ack, for a particular packet.
+
+

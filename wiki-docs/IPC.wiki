@@ -1,0 +1,18 @@
+_This file contains information on various types of Inter Process Communication techniques_
+
+==== Introduction =====
+ # Sockets
+
+
+
+
+
+==== Details ====
+ # socket-based IPC is more popular, since it is portable, flexible, and can be used to communicate across a network. Socket IPC on Solaris software is quite fast and makes use of the loopback interface to move data. But socket IPC has protocol overhead, the connection set up time is high, and it may be a little heavy-weight for a fast IPC. Sockets are implemented in the Solaris kernel, and applications using sockets transfer data using the system calls read and write. These calls make use of the kernel to move data by transferring it from the user space to the kernel, and from the kernel to the user space, thus incurring system time.  loopback is used for local machines.
+
+ # 
+
+
+
+
+

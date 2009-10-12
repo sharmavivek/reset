@@ -1,0 +1,14 @@
+#labels Phase-Design
+_This is suppose to be the high level design for reset-udp_
+
+== Features ==
+
+ * *Reliability support*
+  # Sending Receiving Windows
+  # Retransmission Timers
+  # Acknowledgement System  _acknowledgement is necessary for reliability and flow control_
+  # Nack -- _Negative Acknowledgement_ 
+== Details ==
+
+*Retransmission Timers*
+ Every packet send will start a timer, every ack received will remove the timer entry.

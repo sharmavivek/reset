@@ -1,0 +1,14 @@
+_This presents some interesting thought over TCP Window Scaling_
+_*open*_
+
+=== Introduction ===
+Every TCP packet includes, in the header, a "window" field which specifies how much data the system which sent the packet is willing and able to receive from the other end. The window is the flow control mechanism used by TCP; it controls the maximum amount of data which can be "in flight" between two communicating systems and keeps one side from overwhelming the other with data.
+
+The TCP window field, however, is only 16 bits wide, allowing for a maximum window size of 64KB. Window Scaling is 
+
+=== Details ===
+For places where the TCP scaling option is broken and is having trouble connecting to a needed site can work around the problem with a command like:
+    echo 0 > /proc/sys/net/ipv4/tcp_default_win_scale 
+or by adding a line like:
+    net.ipv4.tcp_default_win_scale = 0
+to /etc/sysctl.conf.

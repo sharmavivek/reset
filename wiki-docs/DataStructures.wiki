@@ -1,0 +1,85 @@
+_This contains the discussions for the Data Structures being chosen_
+
+
+=== Introduction ===
+
+*Commands*
+ # begin	-- _begin the session_
+ # end		-- _end the session_
+ # refresh	-- _refresh keys_
+ # join		-- _join a tunnel/encapsulation_
+ # leave	-- _leave a tunnel/encapsulation_
+
+*SessionLess*
+If we used a sessionless protocol, then a connectionID would need to be transmitted with each message sent, so that the server is able to tell who.
+
+*MultipleRequests*
+If the client can send a request before the server has completed a previous request, then a mechanism for identifying the requests is needed. Usually each message is stamped with a unique identifying number so that when the server provides a response, the client will need to know which request has been fulfilled.
+
+_Pipelining_ -- is another way as in SMTP, rfc 1854.
+
+*enums vs define vs const int*
+
+To a large degree, it's a matter of taste.
+Some prefer enums when they have a number of related integer constants. Enums are clearly preferable when you don't care what the values are. But even when you do need to specify the values for all the constants, I like the mental grouping of an enum. Code documents itself better when you have the type, e.g. 
+error MyFunc();
+clearly returns one of a particular set of error codes, whereas
+int MyFunc()
+
+
+*ZeroMemoryCopy*
+
+=== Details ===
+
+ * What DS shall be used for commands enums or defines?
+ * Will the server be active or passive
+	* _Active_	-- communication can be started by the server, after client has done the setup eg - chat once u login, u can receive message.
+	* _Passive_	-- communication can only be started by the client by some command.
+ * 
+ 
+ 
+ 
+ ==== The Main DataStructure for the memory manager====
+ 
+ typedef struct memory_block_info{
+	struct t_mminfo	*head_ptr;		
+				// only to be altered when decreading the Q 
+	
+	struct t_mminfo	*tail_ptr;		
+				// only to be altered when increasing the Q
+	
+	struct t_mminfo	*in_ptr;		
+				// to add the entity/ usually tail of Q
+	
+	struct t_mminfo	*out_ptr;		
+				// for exit of entity/usually head of Q
+	
+	struct t_mminfo *cur_ptr;		
+				// for present node -- in this same as in_ptr (tail)
+	
+	void*	arr_ptr;				
+				// this points to the memory or the array. (this can used for del)
+	
+	
+	//s23		cur_ptr;			// which node of linked list
+	s32		cur_index;				// which index in current node
+	s32		filled;					// space occupied in total
+	s32		avail;					// space available in the current node.
+}t_mminfo;
+
+ 
+ delete-design (global index derived from the sqn_no recv) --
+	to locate the packet. -- 
+ 	
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
